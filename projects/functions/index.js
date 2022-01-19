@@ -42,8 +42,8 @@ const resl = sumWithDefaults(10, 20);
 console.log(resl);
 const resl1 = sumWithDefaults(2, 4);
 console.log(resl1);
-const resl3 = sumWithDefaults(0);
-console.log(resl3);
+const resl2 = sumWithDefaults(0);
+console.log(resl2);
 
 /*
  Задание 3:
@@ -53,7 +53,22 @@ console.log(resl3);
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-function returnFnResult(fn) {}
+
+// function returnFnResult(fn) {
+// return function fn1() {
+//   return "Привет"
+// };
+
+// }
+
+// let result = returnFnResult();
+// console.log(result());
+
+function returnFnResult(fn) {
+  return fn();
+}
+
+console.log(returnFnResult(() => 'привет'));
 
 /*
  Задание 4:
@@ -71,7 +86,14 @@ function returnFnResult(fn) {}
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {}
+function returnCounter(x = 0) {
+  return function F(fn) {
+    return ++x;
+  };
+}
+
+const control = returnCounter(10);
+console.log(control());
 
 /*
  Задание 5 *:
@@ -82,7 +104,16 @@ function returnCounter(number) {}
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {}
+
+function returnArgumentsArray() {
+  const result = [];
+  for (let i = 0; i < arguments.length; i++) {
+    result[i] = arguments[i];
+  }
+  return result;
+}
+const arg = returnArgumentsArray(1, 2, 3, 4, 5);
+console.log(arg);
 
 /*
  Задание 6 *:
@@ -99,7 +130,8 @@ function returnArgumentsArray() {}
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn, ...args) {}
+
+function bindFunction(fn, ...rest) {}
 
 export {
   returnFirstArgument,
