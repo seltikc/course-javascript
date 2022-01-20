@@ -105,15 +105,23 @@ console.log(control());
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 
-function returnArgumentsArray() {
-  const result = [];
-  for (let i = 0; i < arguments.length; i++) {
-    result[i] = arguments[i];
-  }
-  return result;
+// function returnArgumentsArray() {
+//   const result = [];
+//   for (let i = 0; i < arguments.length; i++) {
+//     result[i] = arguments[i];
+//   }
+//   return result;
+// }
+// const arg = returnArgumentsArray(1, 2, 3, 4, 5);
+// console.log(arg);
+
+function returnArgumentsArray(...args) {
+  return args;
 }
-const arg = returnArgumentsArray(1, 2, 3, 4, 5);
-console.log(arg);
+
+const argumentResultat = returnArgumentsArray(1, 2, 3, 4, 5);
+
+console.log(argumentResultat);
 
 /*
  Задание 6 *:
