@@ -131,7 +131,9 @@ console.log(arg);
    console.log(newSum()) выведет 6
  */
 
-function bindFunction(fn, ...rest) {}
+function bindFunction(fn, ...rest) {
+  return fn.bind(fn, ...rest);
+}
 
 export {
   returnFirstArgument,
