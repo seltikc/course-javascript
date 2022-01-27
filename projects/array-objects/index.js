@@ -9,7 +9,12 @@
  Пример:
    forEach([1, 2, 3], (el) => console.log(el))
  */
-function forEach(array, fn) {}
+
+function forEach(array, fn) {
+  for (let i = 0; i < array.length; i++) {
+    fn(array[i], i, array);
+  }
+}
 
 /*
  Задание 2:
@@ -20,7 +25,13 @@ function forEach(array, fn) {}
  Пример:
    map([1, 2, 3], (el) => el ** 2) // [1, 4, 9]
  */
-function map(array, fn) {}
+function map(array, fn) {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    newArray[i] = fn(array[i], i, array);
+  }
+  return newArray;
+}
 
 /*
  Задание 3:
@@ -31,7 +42,22 @@ function map(array, fn) {}
  Пример:
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
-function reduce(array, fn, initial) {}
+
+function reduce(array, fn, initial) {
+  let sum = 0;
+  let i = 0;
+  if (initial === undefined) {
+    sum = array[0];
+    i = 1;
+  } else {
+    (sum = initial), (i = 0);
+  }
+  for (i; i < array.length; i++) {
+    const result = fn(sum, array[i], i, array);
+    sum = result;
+  }
+  return sum;
+}
 
 /*
  Задание 4:
@@ -41,7 +67,15 @@ function reduce(array, fn, initial) {}
  Пример:
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
-function upperProps(obj) {}
+
+function upperProps(obj) {
+  const arr = [];
+  for (let key in obj) {
+    key = key.toUpperCase();
+    arr.push(key);
+  }
+  return arr;
+}
 
 /*
  Задание 5 *:
