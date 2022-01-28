@@ -44,19 +44,14 @@ function map(array, fn) {
  */
 
 function reduce(array, fn, initial) {
-  let sum = 0;
-  let i = 0;
-  if (initial === undefined) {
-    sum = array[0];
-    i = 1;
-  } else {
-    (sum = initial), (i = 0);
-  }
+  let i = 1;
+  initial = array[0];
+  i = 1;
+
   for (i; i < array.length; i++) {
-    const result = fn(sum, array[i], i, array);
-    sum = result;
+    initial = fn(initial, array[i], i, array);
   }
-  return sum;
+  return initial;
 }
 
 /*
@@ -70,9 +65,8 @@ function reduce(array, fn, initial) {
 
 function upperProps(obj) {
   const arr = [];
-  for (let key in obj) {
-    key = key.toUpperCase();
-    arr.push(key);
+  for (const key in obj) {
+    arr.push(key.toUpperCase());
   }
   return arr;
 }
@@ -88,6 +82,14 @@ function upperProps(obj) {
    obj.foo = 2;
    console.log(obj.foo); // 4
  */
-function createProxy(obj) {}
+
+function createProxy(obj) {
+  return new Proxy(obj, {
+    set(obj, key, value) {
+      obj[key] = value ** 2;
+      return true;
+    },
+  });
+}
 
 export { forEach, map, reduce, upperProps, createProxy };
