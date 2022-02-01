@@ -10,7 +10,13 @@
  Пример:
    createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
  */
-function createDivWithText(text) {}
+function createDivWithText(text) {
+  const divNew = document.createElement('div');
+
+  divNew.textContent = text;
+
+  return divNew;
+}
 
 /*
  Задание 2:
@@ -20,7 +26,10 @@ function createDivWithText(text) {}
  Пример:
    prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
-function prepend(what, where) {}
+
+function prepend(what, where) {
+  where.insertBefore(what, where.firstChild);
+}
 
 /*
  Задание 3:
@@ -41,7 +50,17 @@ function prepend(what, where) {}
 
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
-function findAllPSiblings(where) {}
+
+function findAllPSiblings(where) {
+  const sib = [];
+  for (const elem of where.children) {
+    if (elem.nextElementSibling && elem.nextElementSibling.tagName === 'p') {
+      sib.push(elem);
+    }
+  }
+
+  return sib;
+}
 
 /*
  Задание 4:
@@ -82,7 +101,15 @@ function findError(where) {
    После выполнения функции, дерево <div></div>привет<p></p>loftchool!!!
    должно быть преобразовано в <div></div><p></p>
  */
-function deleteTextNodes(where) {}
+
+function deleteTextNodes(where) {
+  for (const child of where.childNodes) {
+    /*Node.childNodes возвращает коллекцию дочерних элементов данного элемента.*/
+    if (child.nodeType === 3) {
+      child.parentNode.removeChild(child);
+    }
+  }
+}
 
 /*
  Задание 6:
@@ -95,7 +122,16 @@ function deleteTextNodes(where) {}
    После выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
-function deleteTextNodesRecursive(where) {}
+
+function deleteTextNodesRecursive(where) {
+  for (const child of [...where.childNodes]) {
+    if (child.nodeType === 3) {
+      child.parentNode.removeChild(child);
+    } else if (child.nodeType === 1) {
+      deleteTextNodesRecursive(child);
+    }
+  }
+}
 
 /*
  Задание 7 *:
