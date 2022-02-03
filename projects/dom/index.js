@@ -28,7 +28,7 @@ function createDivWithText(text) {
  */
 
 function prepend(what, where) {
-  where.insertBefore(what, where.firstChild);
+  where.prepend(what);
 }
 
 /*
