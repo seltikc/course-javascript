@@ -1,10 +1,22 @@
-const focus = {
-  name: 'Alex',
-  lastName: 'Sitnikov',
-  firstName: 'Anatolec',
-  old: 37,
-};
+// const person = {
+//   name: 'Alex',
+//   age: 37
+// }
 
-delete focus.name;
-focus.name = 'Sasha';
-console.log(focus.name);
+//  function personOne(pers) {
+//    const newPerson = {...pers}
+//    newPerson.lastName = 'Sitnikov'
+//    newPerson.age +=3
+//    return newPerson;
+//  }
+
+//  const result = personOne(person)
+
+//  console.log(person);
+//  console.log(result);
+
+function printName() {
+  console.log('Bagdan');
+}
+console.log('2222');
+setTimeout(printName, 2000);
