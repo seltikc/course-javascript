@@ -153,7 +153,38 @@ function deleteTextNodesRecursive(where) {
      texts: 3
    }
  */
-function collectDOMStat(root) {}
+function collectDOMStat(root) {
+  const statys = {
+    tags: {},
+    classes: {},
+    texts: 0,
+  };
+
+  function scan(root) {
+    for (const child of root.childNodes) {
+      if (child.nodeType === Node.TEXT_NODE) {
+        statys.texts++;
+      } else if (child.nodeType === Node.ELEMENT_NODE) {
+        if (child.tagName in statys.tags) {
+          statys.tags[child.tagName]++;
+        } else {
+          statys.tags[child.tagName] = 1;
+        }
+        for (const className of child.classList) {
+          if (className in statys.classes) {
+            statys.classes[className]++;
+          } else {
+            statys.classes[className] = 1;
+          }
+        }
+        scan(child);
+      }
+    }
+  }
+  scan(root);
+
+  return statys;
+}
 
 /*
  Задание 8 *:
@@ -187,7 +218,22 @@ function collectDOMStat(root) {}
      nodes: [div]
    }
  */
-function observeChildNodes(where, fn) {}
+function observeChildNodes(where, fn) {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        fn({
+          type: mutation.addedNodes.length ? 'insert' : 'remove',
+          nodes: [
+            ...(mutation.addedNodes.length ? mutation.addedNodes : mutation.removedNodes),
+          ],
+        });
+      }
+    });
+  });
+
+  observer.observe(where, { childList: true, subtree: true });
+}
 
 export {
   createDivWithText,
