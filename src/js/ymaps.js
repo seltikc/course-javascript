@@ -3,15 +3,15 @@ import customBalloonContentLayoutRender from '../templates/customBalloonContentL
 
 function initMap() {
     ymaps.ready(function () {
-        const mapCenter = [55.755381, 37.619044],
+        const mapCenter = [56.8519,  60.6122],
             myMap = new ymaps.Map('map', {
                 center: mapCenter,
-                zoom: 10,
+                zoom: 12,
             });
 
         const customBalloonLayout = ymaps.templateLayoutFactory.createClass(customBalloonLayoutRender());
         const customBalloonContentLayout = ymaps.templateLayoutFactory.createClass(customBalloonContentLayoutRender());
-        // #####
+        
         let currentCoords,
             currentAddress = '';
 
@@ -96,7 +96,6 @@ function initMap() {
             document.querySelector('.balloon__close-button').addEventListener('click', evt => {
                 myMap.balloon.close()
             })
-            // myMap.balloon.autoPan();  // Dont work. 2020-02-28
         });
 
         var clusterer = new ymaps.Clusterer({
